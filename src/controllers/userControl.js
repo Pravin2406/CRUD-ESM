@@ -1,4 +1,6 @@
-import User from "../modules/user.js";
+import User from "../models/user.js";
+// import models from "../models"
+import bcrypt from "bcryptjs"
 
 export const userdata = async (req, resp) => {
   try {
@@ -14,8 +16,9 @@ export const signup = async (req, resp) => {
   try {
     console.log("signup is called");
     if (req?.body?.pass == req?.body?.cpass) {
-      const user = new User(req.body);
-      await user.save();
+      // await models.User.create(req?.body)
+      // const user = new User(req.body);
+      await User.create(req?.body)
       resp.status(200).send("Registration successfully done....");
     } else {
       console.log("Passward and confirm password is not match!!!");
